@@ -1,0 +1,59 @@
+<h2>What Is a Machine Learning Pipeline?</h2>
+<p>
+  A machine learning pipeline is an end-to-end system that automates the workflow of a machine learning project — from raw data to a deployed, production-ready model. Think of it as an assembly line for intelligence: each stage transforms the input and passes it to the next, ultimately producing a model that can make predictions on new data.
+</p>
+
+<h2>The Essential Stages</h2>
+
+<h3>1. Data Collection & Ingestion</h3>
+<p>
+  Every ML project starts with data. This stage involves gathering data from various sources — databases, APIs, web scraping, sensors, or user interactions. The key challenge is ensuring data quality and consistency from the very beginning.
+</p>
+
+<h3>2. Data Preprocessing</h3>
+<p>
+  Raw data is rarely ready for training. This stage includes cleaning (handling missing values, removing duplicates), transformation (normalization, encoding categorical variables), and feature engineering (creating new features from existing data). This is often the most time-consuming part of the pipeline.
+</p>
+
+<h3>3. Model Training</h3>
+<p>
+  With clean, prepared data, you can train your model. This involves selecting an algorithm, splitting data into training and validation sets, tuning hyperparameters, and evaluating performance. Experiment tracking tools like MLflow or Weights & Biases help manage this process.
+</p>
+
+<h3>4. Model Evaluation</h3>
+<p>
+  Before deployment, models must be rigorously evaluated. This includes performance metrics (accuracy, precision, recall, F1), bias detection, and testing on held-out datasets. The goal is to ensure the model generalizes well to unseen data.
+</p>
+
+<h3>5. Deployment</h3>
+<p>
+  A trained model needs to be accessible. Deployment can range from a simple REST API to a containerized microservice running on Kubernetes. The deployment strategy depends on your requirements for latency, throughput, and availability.
+</p>
+
+<h3>6. Monitoring & Maintenance</h3>
+<p>
+  Models degrade over time as the real world changes. Monitoring tracks model performance in production, detects data drift, and triggers retraining when necessary. This creates a feedback loop that keeps the model accurate over time.
+</p>
+
+<h2>Tools of the Trade</h2>
+<ul>
+  <li><strong>Data Processing</strong> — Pandas, Apache Spark, Dask</li>
+  <li><strong>Model Training</strong> — Scikit-learn, PyTorch, TensorFlow</li>
+  <li><strong>Experiment Tracking</strong> — MLflow, Weights & Biases</li>
+  <li><strong>Deployment</strong> — Docker, FastAPI, TensorFlow Serving</li>
+  <li><strong>Orchestration</strong> — Airflow, Prefect, Kubeflow</li>
+  <li><strong>Monitoring</strong> — Prometheus, Grafana, Evidently AI</li>
+</ul>
+
+<h2>Start Small, Think Big</h2>
+<p>
+  If you're just starting out, don't try to build a perfect pipeline from day one. Start with a simple script that loads data, trains a model, and saves the results. Then gradually add components — preprocessing steps, evaluation metrics, deployment scripts. Each addition makes your pipeline more robust and production-ready.
+</p>
+
+<blockquote>
+  "The best machine learning pipeline is the one that gets your model into production — not the one that looks the most sophisticated on a whiteboard."
+</blockquote>
+
+<p>
+  As I work through my AI program at Centennial College, building pipelines has become one of my favorite practical exercises. It connects the theoretical concepts from class — statistics, algorithms, data structures — to the real-world engineering needed to create AI systems that actually work.
+</p>

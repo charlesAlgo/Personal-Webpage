@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tech industry articles by Charles Shalua — covering AI, machine learning, autonomous agents, and emerging technologies.">
+  <title>Blog — Charles Shalua</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <nav class="nav scrolled" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Charles<span>.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#future">Vision</a></li>
+        <li><a href="index.html#school">Education</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="index.html#about">About me</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary nav-cta">Let's Talk</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+  <!-- ===================== PAGE HEADER ===================== -->
+  <header class="page-header">
+    <div class="container">
+      <span class="section-label">// Blog</span>
+      <h1 class="section-title">Thoughts on <span class="gradient-text">Tech & AI</span></h1>
+      <p class="section-desc page-header-desc">Weekly articles exploring artificial intelligence, software engineering, and the future of technology.</p>
+      <div class="blog-search">
+        <span class="blog-search-icon">🔍</span>
+        <input type="text" id="blogSearch" placeholder="Search articles..." aria-label="Search articles">
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== BLOG GRID ===================== -->
+  <section>
+    <div class="container">
+      <div class="blog-grid" id="blogGrid">
+        <!-- Articles loaded dynamically by blog.js -->
+      </div>
+      <div class="no-results" id="noResults" style="display: none;">
+        <h3>No articles found</h3>
+        <p>Try a different search term or browse all articles.</p>
+      </div>
+    </div>
+  </section>
+
+  </main><!-- #main-content -->
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">Charles<span>.</span></div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#future">Vision</a></li>
+          <li><a href="index.html#school">Education</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Charles Shalua. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/blog.js"></script>
+</body>
+</html>

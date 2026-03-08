@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Charles Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- ===================== TOP NAV ===================== -->
+  <nav class="admin-nav">
+    <a href="dashboard.html" class="admin-nav-logo">Charles<span>.</span> Admin</a>
+
+    <div class="admin-nav-tabs">
+      <button class="admin-tab-btn active" id="tabBtnMessages" onclick="switchTab('messages')">
+        Messages
+        <span class="admin-tab-badge" id="unreadBadge" style="display:none;">0</span>
+      </button>
+      <button class="admin-tab-btn" id="tabBtnArticles" onclick="switchTab('articles')">
+        Articles
+      </button>
+    </div>
+
+    <div class="admin-nav-actions">
+      <a href="../index.html" class="btn btn-ghost btn-sm" target="_blank">View Site</a>
+      <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign Out</button>
+    </div>
+  </nav>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <main class="admin-main" style="margin-top: 64px;">
+    <div id="tabContent">
+      <div class="admin-loading">
+        <div class="spinner"></div>
+        Loading…
+      </div>
+    </div>
+  </main>
+
+  <!-- ===================== ARTICLE EDITOR MODAL ===================== -->
+  <div class="modal-backdrop hidden" id="articleModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">New Article</h2>
+        <button class="modal-close" id="modalCloseBtn" aria-label="Close">&times;</button>
+      </div>
+
+      <form id="articleForm" novalidate>
+        <div class="form-group">
+          <label for="fieldId">Slug / ID <small style="font-weight:400; color:#9ca3af">(URL-friendly, e.g. my-article-slug)</small></label>
+          <input type="text" id="fieldId" name="id" placeholder="my-article-slug" required>
+        </div>
+
+        <div class="form-group">
+          <label for="fieldTitle">Title</label>
+          <input type="text" id="fieldTitle" name="title" placeholder="Article title" required>
+        </div>
+
+        <div class="form-group">
+          <label for="fieldExcerpt">Excerpt</label>
+          <textarea id="fieldExcerpt" name="excerpt" placeholder="Short description shown on the blog listing…" style="min-height:80px;"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fieldTag">Tag / Category</label>
+            <input type="text" id="fieldTag" name="tag" placeholder="e.g. AI Agents">
+          </div>
+          <div class="form-group">
+            <label for="fieldReadTime">Read Time</label>
+            <input type="text" id="fieldReadTime" name="read_time" placeholder="e.g. 5 min read">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="fieldContent">Content <small style="font-weight:400; color:#9ca3af">(HTML)</small></label>
+          <textarea id="fieldContent" name="content" class="content-editor" placeholder="<h2>Introduction</h2><p>Your article content here…</p>"></textarea>
+        </div>
+
+        <div class="form-check">
+          <input type="checkbox" id="fieldPublished" name="published">
+          <label for="fieldPublished">Published (visible on site)</label>
+        </div>
+      </form>
+
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="modalCancelBtn">Cancel</button>
+        <button class="btn btn-primary" id="modalSaveBtn">Save Article</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
