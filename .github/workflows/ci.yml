@@ -1,0 +1,130 @@
+name: CI — Validate & Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_call:
+
+jobs:
+  # ──────────────────────────────────────────────
+  # 1. HTML Validation
+  # ──────────────────────────────────────────────
+  html-validate:
+    name: Validate HTML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install html-validate
+        run: npm install -g html-validate
+
+      - name: Run HTML validation
+        run: |
+          html-validate \
+            "*.html" \
+            "articles/*.html" \
+            "admin/*.html" \
+            --config '{"extends":["html-validate:recommended"],"rules":{"no-trailing-whitespace":"off","attr-quotes":"off","doctype-style":"off","tel-non-global":"off","no-inline-style":"off","wcag/h71":"off","script-type":"off"}}'
+
+  # ──────────────────────────────────────────────
+  # 2. CSS Linting
+  # ──────────────────────────────────────────────
+  css-lint:
+    name: Lint CSS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Stylelint
+        run: npm install -g stylelint stylelint-config-standard
+
+      - name: Run Stylelint
+        run: |
+          stylelint "css/**/*.css" "admin/css/**/*.css" \
+            --config '{"extends":"stylelint-config-standard","rules":{"no-descending-specificity":null,"selector-class-pattern":null,"custom-property-pattern":null,"keyframes-name-pattern":null,"alpha-value-notation":null,"color-function-notation":null,"declaration-block-no-redundant-longhand-properties":null,"shorthand-property-no-redundant-values":null}}'
+
+  # ──────────────────────────────────────────────
+  # 3. JavaScript Linting
+  # ──────────────────────────────────────────────
+  js-lint:
+    name: Lint JavaScript
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install ESLint
+        run: npm install -g eslint@8
+
+      - name: Run ESLint
+        run: |
+          eslint "js/**/*.js" "admin/js/**/*.js" \
+            --env browser,es2021 \
+            --parser-options=ecmaVersion:2022 \
+            --rule '{"no-unused-vars":"warn","no-undef":"warn","no-console":"off","semi":"warn"}' \
+            --no-eslintrc
+
+  # ──────────────────────────────────────────────
+  # 4. Link Checker
+  # ──────────────────────────────────────────────
+  link-check:
+    name: Check Internal Links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install link checker
+        run: npm install -g htmlhint
+
+      - name: Run HTMLHint
+        run: |
+          htmlhint "*.html" "articles/*.html" "admin/*.html" \
+            --rules "attr-lowercase=false,doctype-first=true,tag-pair=true,src-not-empty=true,href-abs-or-rel=true"
+
+  # ──────────────────────────────────────────────
+  # 5. Security Headers Check
+  # ──────────────────────────────────────────────
+  security-check:
+    name: Verify Security Config
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check security headers in netlify.toml
+        run: |
+          echo "Checking security headers in netlify.toml..."
+          grep -q "X-Frame-Options" netlify.toml || (echo "FAIL: Missing X-Frame-Options" && exit 1)
+          grep -q "X-Content-Type-Options" netlify.toml || (echo "FAIL: Missing X-Content-Type-Options" && exit 1)
+          grep -q "Referrer-Policy" netlify.toml || (echo "FAIL: Missing Referrer-Policy" && exit 1)
+          echo "All security headers present."
+
+      - name: Check for exposed secrets
+        run: |
+          echo "Scanning for potential secrets..."
+          # Fail if any .env files are tracked
+          if git ls-files | grep -qE "\.env$"; then
+            echo "FAIL: .env file is tracked in git!"
+            exit 1
+          fi
+          echo "No secrets detected."

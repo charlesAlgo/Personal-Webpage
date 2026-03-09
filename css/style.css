@@ -48,7 +48,7 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* Spacing */
-  --section-padding: 100px 0;
+  --section-padding: 80px 0;
   --container-width: 1200px;
   --nav-height: 72px;
 
@@ -336,7 +336,7 @@ img {
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  align-items: end;
+  align-items: center;
   background: #eef1f6;
   overflow: hidden;
   padding-top: var(--nav-height);
@@ -377,7 +377,7 @@ img {
 
 /* ---------- Left Column ---------- */
 .hero-left {
-  padding-bottom: 80px;
+  padding-bottom: 0;
   animation: fadeInLeft 0.9s ease-out both;
 }
 
@@ -450,7 +450,7 @@ img {
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   width: 340px;
   animation: fadeInUp 0.9s ease-out 0.1s both;
 }
@@ -478,7 +478,7 @@ img {
   border-radius: 50%;
   border: 5px solid rgba(255, 255, 255, 0.9);
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12), 0 0 0 8px rgba(37, 99, 235, 0.08);
-  margin-bottom: 40px;
+  margin-bottom: 0;
 }
 
 /* ---------- Right Column (Skill Cards) ---------- */
@@ -486,7 +486,7 @@ img {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding-bottom: 80px;
+  padding-bottom: 0;
   align-items: flex-start;
   animation: fadeInRight 0.9s ease-out 0.2s both;
 }
@@ -1402,6 +1402,42 @@ section + section::before {
   .btn {
     width: 100%;
     justify-content: center;
+  }
+}
+
+/* ---------- Large Screens ---------- */
+@media (min-width: 1441px) {
+  .hero {
+    max-height: 100vh;
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+
+  .hero-portrait {
+    width: 340px;
+    height: 340px;
+  }
+
+  .hero-portrait-bg {
+    width: 380px;
+    height: 380px;
+  }
+
+  .hero-center {
+    width: 380px;
+  }
+}
+
+@media (min-width: 1921px) {
+  :root {
+    --container-width: 1400px;
+    --section-padding: 80px 0;
+  }
+
+  .hero {
+    max-height: 900px;
+    min-height: auto;
+    height: 100vh;
   }
 }
 

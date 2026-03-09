@@ -99,9 +99,27 @@ function validateField(field) {
   }
 
   if (field.type === 'email' && field.value.trim()) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(field.value.trim())) {
+    const email = field.value.trim();
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const errorSpan = group.querySelector('.form-error');
+
+    if (!emailRegex.test(email)) {
       valid = false;
+      if (errorSpan) {
+        if (!email.includes('@')) {
+          errorSpan.textContent = 'Email must contain an @ symbol';
+        } else if (email.indexOf('@') === 0) {
+          errorSpan.textContent = 'Email must have a name before the @';
+        } else if (email.split('@').length > 2) {
+          errorSpan.textContent = 'Email must contain only one @ symbol';
+        } else if (!/\.[a-zA-Z]{2,}$/.test(email)) {
+          errorSpan.textContent = 'Email must end with a valid domain (e.g. .com, .ca)';
+        } else {
+          errorSpan.textContent = 'Please enter a valid email address';
+        }
+      }
+    } else if (errorSpan) {
+      errorSpan.textContent = 'Please enter a valid email address';
     }
   }
 
